@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context=".info">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="322dp"
+        android:orientation="vertical">
+
+
+        <ImageView
+            android:id="@+id/imageBack"
+            android:layout_width="419dp"
+            android:layout_height="168dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/judo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/shopBag"
+            android:layout_width="57dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="176dp"
+            android:src="@drawable/shopping_bag"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/titleProduct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif"
+            android:text="Deja Vu Men's Collection"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/shopBag"
+            app:layout_constraintTop_toBottomOf="@+id/imageBack" />
+
+        <RatingBar
+            android:id="@+id/rating"
+            style="?android:attr/ratingBarStyleIndicator"
+            android:layout_width="177dp"
+            android:layout_height="33dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="56dp"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:progressTint="@color/averageColor"
+            android:rating="5"
+            android:scaleX="0.8"
+            android:scaleY="0.8"
+            android:secondaryProgressTint="@android:color/transparent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleProduct" />
+
+        <ImageButton
+            android:id="@+id/sub"
+            android:layout_width="147dp"
+            android:layout_height="38dp"
+            android:background="@android:drawable/screen_background_light_transparent"
+            android:onClick="onSubscribe"
+            android:scaleType="center"
+            android:src="@drawable/subscribe"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/rating"
+            app:layout_constraintTop_toBottomOf="@+id/titleProduct" />
+
+        <TextView
+            android:id="@+id/infoProductType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="76dp"
+            android:text="Apparel &amp; Footwear"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rating" />
+
+        <TextView
+            android:id="@+id/percentageOff"
+            android:layout_width="102dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="76dp"
+            android:layout_marginTop="12dp"
+            android:elevation="2dp"
+            android:text="10% off"
+            android:textColor="@color/skyBlueColor"
+            android:textSize="28dp"
+            app:layout_constraintStart_toStartOf="@id/shopBag"
+            app:layout_constraintTop_toBottomOf="@id/infoProductType" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="136dp"
+            android:layout_marginTop="72dp"
+            android:text="on entire bill"
+            android:textColor="@color/skyBlueColor"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@id/percentageOff"
+            app:layout_constraintTop_toBottomOf="@+id/titleProduct" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- TODO: Update blank fragment layout -->
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#CDCDCD"
+        android:elevation="4dp"
+        android:minHeight="?attr/actionBarSize"
+        app:tabGravity="fill"
+        app:tabMode="fixed"
+        android:padding="5dp"
+        app:tabPaddingBottom="-1dp"
+        app:tabPaddingEnd="-1dp"
+        app:tabPaddingStart="-1dp"
+        app:tabPaddingTop="-1dp"
+        app:tabSelectedTextColor="@color/blackColor"
+
+        app:tabTextAppearance="@style/MyCustomTabText"
+        app:tabTextColor="@color/skyBlueColor" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/pager"
+        Of="@id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tabs" />
+</LinearLayout>
