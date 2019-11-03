@@ -91,10 +91,10 @@ public class home extends AppCompatActivity implements View.OnClickListener{
         verticalList.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         verticalList.setItemAnimator(new DefaultItemAnimator());
 
-        String[] v1={"Kids Fashion City","Deja VU Men's Collection","Ali Pharmacy"};
-        String [] v2={"Toys and Gifts","Apparel and Footwear","Health and Fitness"};
-        int [] vi1={R.drawable.kidfashion,R.drawable.menclothes,R.drawable.pharmacy};
-        int[] vi2={R.drawable.robotic,R.drawable.shopping_bag,R.drawable.medicine};
+        String[] v1={"Kids Fashion City","Deja VU Men's Collection","Ali Pharmacy","Shah Curtains","Noor Electric Company"};
+        String [] v2={"Toys and Gifts","Apparel and Footwear","Health and Fitness","Home and Living","Electronics"};
+        int [] vi1={R.drawable.kidfashion,R.drawable.menclothes,R.drawable.pharmacy ,R.drawable.shahcurtain,R.drawable.lapnoor};
+        int[] vi2={R.drawable.robotic,R.drawable.shopping_bag,R.drawable.medicine,R.drawable.homeicon,R.drawable.electricicon};
 
 
         //verticalList.setAdapter();

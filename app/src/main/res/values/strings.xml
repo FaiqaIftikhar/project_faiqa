@@ -13,10 +13,12 @@
     <string name="signup_with_googleplay">SignIn with Google Play</string>
     <string name="signup_with_facebook">SignIn with Facebook</string>
     <string name="signup_with_twitter">SignIn with Twitter</string>
-    <string name="appname">Golootlo!</string>
+    <string name="appname">BazaarApp</string>
 
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="female">Female</string>
+    <string name="male">Male</string>
 
 </resources>
