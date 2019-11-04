@@ -9,14 +9,16 @@
         android:roundIcon="@mipmap/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".category"></activity>
+        <activity android:name=".poster"></activity>
+        <activity android:name=".category" />
         <activity android:name=".notification" />
-
-        <activity android:name=".activitySignup" />
+        <activity android:name=".activitySignup"
+            android:alwaysRetainTaskState="true"
+            android:launchMode="singleInstance"/>
         <activity android:name=".info" />
         <activity android:name=".home" />
-        <activity android:name=".MainActivity"/>
-            <activity android:name=".SplashActivity" >
+        <activity android:name=".MainActivity" />
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

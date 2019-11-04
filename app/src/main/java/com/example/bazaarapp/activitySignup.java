@@ -33,7 +33,7 @@ public class activitySignup extends AppCompatActivity {
             @Override
             public void onClick(View arg0) {
 
-                Intent intent = new Intent(context, home.class);
+                Intent intent = new Intent(context, MainActivity.class);
                 startActivity(intent);
 
             }

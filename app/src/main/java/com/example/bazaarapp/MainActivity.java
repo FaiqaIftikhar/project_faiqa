@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View arg0) {
 
                 Intent intent = new Intent(context, activitySignup.class);
+              //  intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
 
             }

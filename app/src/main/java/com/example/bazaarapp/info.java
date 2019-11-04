@@ -3,6 +3,7 @@ package com.example.bazaarapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -37,5 +38,8 @@ public class info extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "You will now recieve its notification! :))!" , Toast.LENGTH_SHORT ).show();
 
 
+    }
+    public void backAcivity(View view){
+        view.getContext().startActivity(new Intent(view.getContext(), home.class));
     }
 }
