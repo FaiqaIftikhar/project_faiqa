@@ -34,9 +34,9 @@
             <TextView
                 android:id="@+id/heading"
                 android:layout_width="161dp"
-                android:fontFamily="@font/nunito_bold"
                 android:layout_height="37dp"
                 android:layout_marginStart="20dp"
+                android:fontFamily="@font/nunito_bold"
                 android:layout_marginTop="2dp"
                 android:text="Heading"
                 android:textAppearance="?android:attr/textAppearanceLarge"
@@ -46,10 +46,10 @@
             <TextView
                 android:id="@+id/content1"
                 android:layout_width="wrap_content"
-                android:fontFamily="@font/nunito_bold"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="84dp"
-                android:layout_marginTop="12dp"
+                android:fontFamily="@font/nunito_bold"
+                android:layout_marginTop="16dp"
                 android:text="content"
                 android:textColor="@color/skyBlueColor"
                 card_view:layout_constraintStart_toStartOf="parent"
@@ -59,11 +59,11 @@
                 android:id="@+id/nextbtn"
                 android:layout_width="43dp"
                 android:layout_height="41dp"
-                android:layout_marginStart="252dp"
+                android:layout_marginStart="540dp"
                 android:layout_marginTop="16dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/arrow"
                 android:background="@color/whiteColor"
+                android:src="@drawable/arrow"
                 card_view:layout_constraintStart_toStartOf="@id/content1"
                 card_view:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>

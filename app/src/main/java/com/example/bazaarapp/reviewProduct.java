@@ -70,7 +70,7 @@ public class reviewProduct extends Fragment {
                 final RatingBar ratingBar = new RatingBar(view.getContext());
                 ratingBar.setStepSize((float) 0.5);
 
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Add your own review", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });

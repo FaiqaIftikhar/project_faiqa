@@ -193,8 +193,34 @@ public class home extends AppCompatActivity implements View.OnClickListener, Nav
                 Intent intent = new Intent(this, poster.class);
                 startActivity(intent);
                 //  getSupportFragmentManager().beginTransaction().replace(R.id.drawer_layout,new shit()).commit();
-                Toast.makeText(getBaseContext(), "Added to favourites!" , Toast.LENGTH_SHORT ).show();
+                Toast.makeText(getBaseContext(), "Post your add now!!!!" , Toast.LENGTH_SHORT ).show();
                 break;
+            case R.id.nav_favourites:
+                Intent intent1 = new Intent(this, favourite.class);
+                startActivity(intent1);
+                //  getSupportFragmentManager().beginTransaction().replace(R.id.drawer_layout,new shit()).commit();
+                Toast.makeText(getBaseContext(), "Here are the favourites!" , Toast.LENGTH_SHORT ).show();
+                break;
+            case R.id.nav_logout:
+                Intent intent2 = new Intent(this, MainActivity.class);
+                startActivity(intent2);
+                //  getSupportFragmentManager().beginTransaction().replace(R.id.drawer_layout,new shit()).commit();
+                Toast.makeText(getBaseContext(), "You have Logged out!" , Toast.LENGTH_SHORT ).show();
+                break;
+            case R.id.nav_user:
+                Intent intent3 = new Intent(this, userProfile.class);
+                startActivity(intent3);
+                //  getSupportFragmentManager().beginTransaction().replace(R.id.drawer_layout,new shit()).commit();
+                Toast.makeText(getBaseContext(), "Here is your Profile" , Toast.LENGTH_SHORT ).show();
+                break;
+            case R.id.nav_profile:
+                Intent intent4 = new Intent(this, subscription.class);
+                startActivity(intent4);
+                //  getSupportFragmentManager().beginTransaction().replace(R.id.drawer_layout,new shit()).commit();
+                Toast.makeText(getBaseContext(), "Here are your subscriptions" , Toast.LENGTH_SHORT ).show();
+                break;
+
+
 
         }
         drawer.closeDrawer(GravityCompat.START);

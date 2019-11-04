@@ -1,5 +1,6 @@
 package com.example.bazaarapp;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,13 +23,28 @@ public class categoryAdapter extends RecyclerView.Adapter<categoryAdapter.MyView
         ImageView imageViewIcon;
         ImageView imageViewback;
 
-        public MyViewHolder(View itemView) {
+        public MyViewHolder(final View itemView) {
             super(itemView);
             this.textViewName = (TextView) itemView.findViewById(R.id.head1);
             this.textViewVersion = (TextView) itemView.findViewById(R.id.head2);
             this.imageViewIcon = (ImageView) itemView.findViewById(R.id.verLogo);
             this.imageViewback= (ImageView) itemView.findViewById(R.id.verBack);
+
+
+
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    /// Intent intent=new Intent(itemView.getContext(),info.class);
+                    //intent.putExtra("heading",)
+                    itemView.getContext().startActivity(new Intent(itemView.getContext(), info.class));
+                }
+            });
+
+            ///////////////
         }
+
     }
 
 

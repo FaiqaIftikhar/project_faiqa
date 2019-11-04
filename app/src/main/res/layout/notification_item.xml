@@ -33,6 +33,7 @@
             android:layout_marginLeft="50dp"
             android:paddingLeft="10dp"
             android:paddingTop="10dp"
+            android:fontFamily="@font/nunito_bold"
             android:text="HurryUP\nLast Day Of Offer!"
             android:textColor="#0A0A0A" />
     </androidx.cardview.widget.CardView>
