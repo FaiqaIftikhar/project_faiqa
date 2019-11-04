@@ -4,18 +4,21 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".category"></activity>
+        <activity android:name=".poster"></activity>
+        <activity android:name=".category" />
         <activity android:name=".notification" />
-        <activity android:name=".SplashActivity" />
-        <activity android:name=".activitySignup" />
+        <activity android:name=".activitySignup"
+            android:alwaysRetainTaskState="true"
+            android:launchMode="singleInstance"/>
         <activity android:name=".info" />
         <activity android:name=".home" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" />
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

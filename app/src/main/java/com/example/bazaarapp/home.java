@@ -11,8 +11,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 import androidx.core.view.MenuItemCompat;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
@@ -22,9 +24,10 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
-public class home extends AppCompatActivity implements View.OnClickListener{
+public class home extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
 
     TextView textCartItemCount;
     int mCartItemCount = 10;
@@ -42,6 +45,10 @@ public class home extends AppCompatActivity implements View.OnClickListener{
         Toolbar toolbar = findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
         drawer = findViewById(R.id.drawer_layout);
+
+        NavigationView navigationView=findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -91,10 +98,10 @@ public class home extends AppCompatActivity implements View.OnClickListener{
         verticalList.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         verticalList.setItemAnimator(new DefaultItemAnimator());
 
-        String[] v1={"Kids Fashion City","Deja VU Men's Collection","Ali Pharmacy"};
-        String [] v2={"Toys and Gifts","Apparel and Footwear","Health and Fitness"};
-        int [] vi1={R.drawable.kidfashion,R.drawable.menclothes,R.drawable.pharmacy};
-        int[] vi2={R.drawable.robotic,R.drawable.shopping_bag,R.drawable.medicine};
+        String[] v1={"Kids Fashion City","Deja VU Men's Collection","Ali Pharmacy","Shah Curtains","Noor Electric Company"};
+        String [] v2={"Toys and Gifts","Apparel and Footwear","Health and Fitness","Home and Living","Electronics"};
+        int [] vi1={R.drawable.kidfashion,R.drawable.menclothes,R.drawable.pharmacy ,R.drawable.shahcurtain,R.drawable.lapnoor};
+        int[] vi2={R.drawable.robotic,R.drawable.shopping_bag,R.drawable.medicine,R.drawable.homeicon,R.drawable.electricicon};
 
 
         //verticalList.setAdapter();
@@ -149,7 +156,7 @@ public class home extends AppCompatActivity implements View.OnClickListener{
         textCartItemCount = (TextView) actionView.findViewById(R.id.cart_badge);
 
         setupBadge();
-      actionView.setOnClickListener(this);
+        actionView.setOnClickListener(this);
 
 
         return true;
@@ -161,21 +168,36 @@ public class home extends AppCompatActivity implements View.OnClickListener{
 
         Intent startNewScreen=new Intent(this,notification.class);
         startActivity(startNewScreen);
-      //  switch (v.getId() /*to get clicked view id**/) {
-           // case R.id.cardviewVerlist:
+        //  switch (v.getId() /to get clicked view id*/) {
+        // case R.id.cardviewVerlist:
 
 
 
-                // do something when the corky is clicked
+        // do something when the corky is clicked
 
-             //   break;
+        //   break;
 
         //    default:
 //
-         //       break;
-      //  }
+        //       break;
+        //  }
 
     }
 
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.nav_add:
+                Intent intent = new Intent(this, poster.class);
+                startActivity(intent);
+                //  getSupportFragmentManager().beginTransaction().replace(R.id.drawer_layout,new shit()).commit();
+                Toast.makeText(getBaseContext(), "Added to favourites!" , Toast.LENGTH_SHORT ).show();
+                break;
+
+        }
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
 }

@@ -80,13 +80,14 @@
             <ImageButton
                 android:id="@+id/addToFav"
                 style="@android:style/Widget.DeviceDefault.ImageButton"
-                android:layout_width="42dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right|top"
-                android:background="@android:drawable/screen_background_dark_transparent"
+                android:layout_width="37dp"
+                android:layout_height="36dp"
+                android:layout_marginBottom="9dp"
+                android:layout_gravity="right|bottom"
+                android:background="@color/whiteColor"
                 android:onClick="addToFavourite"
                 android:scaleType="fitXY"
-                android:src="@android:drawable/star_big_on" />
+                android:src="@drawable/star" />
 
         </FrameLayout>
 
