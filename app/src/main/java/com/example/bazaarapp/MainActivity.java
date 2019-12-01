@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+       // setContentView(R.layout.activity_home);
         mAuth=FirebaseAuth.getInstance();
 
         email=findViewById(R.id.editText3);

@@ -26,9 +26,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class home extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
 
+    DatabaseReference mDatabaseRef;
+    List<DealPoster> mdeals;
+    RecyclerView mRecyclerview;
+    DealAdapter mAdapter;
     TextView textCartItemCount;
     int mCartItemCount = 10;
     ViewFlipper flipper;
@@ -79,6 +91,41 @@ public class home extends AppCompatActivity implements View.OnClickListener, Nav
 
         /////////RECYCLER VIEW 2
 
+
+     //   DealAdapter mAdapter;
+
+
+
+        mRecyclerview=findViewById(R.id.pickList);
+        mRecyclerview.setHasFixedSize(true);
+        mRecyclerview.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+        mdeals=new ArrayList<>();
+        mDatabaseRef= FirebaseDatabase.getInstance().getReference("Deal Poster");
+        mDatabaseRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    Toast.makeText(getBaseContext(), "in ONDataChange!" , Toast.LENGTH_SHORT ).show();
+                    DealPoster upload = postSnapshot.getValue(DealPoster.class);
+                    mdeals.add(upload);
+                }
+
+                mAdapter = new DealAdapter(home.this, mdeals);
+
+                mRecyclerview.setAdapter(mAdapter);
+              //  mProgressCircle.setVisibility(View.INVISIBLE);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(home.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+             //   mProgressCircle.setVisibility(View.INVISIBLE);
+            }
+        });
+
+/*
+
         RecyclerView pickList=findViewById(R.id.pickList);
         pickList.setHasFixedSize(true);
         pickList.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
@@ -92,6 +139,7 @@ public class home extends AppCompatActivity implements View.OnClickListener, Nav
         int [] i2={R.drawable.logo1,R.drawable.logo2,R.drawable.logo3,R.drawable.logo4};
         pickList.setAdapter(new pickAdapter(a1,i1,a2,i2));
 
+*/
         /////RECYCELR VIEW 3
         RecyclerView verticalList=findViewById(R.id.verticalList);
         verticalList.setHasFixedSize(true);
