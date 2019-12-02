@@ -21,6 +21,11 @@
             android:id="@+id/nav_add"
             android:icon="@drawable/plus"
             android:title="Post Own Add" />
+        <item
+            android:id="@+id/nav_brand"
+            android:icon="@drawable/plus"
+            android:title="Register Brand" />
+
 
 
 

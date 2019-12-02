@@ -7,9 +7,27 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 public class ViewPagerAdapter extends FragmentPagerAdapter {
 
+
+    String timings;
+    Double address;
+    String contact;
+
+
     public ViewPagerAdapter(FragmentManager fm){
         super(fm);
+
+
     }
+
+    public ViewPagerAdapter(FragmentManager fm,Double lat,String contact,String time){
+        super(fm);
+
+        this.timings=time;
+        this.address=lat;
+        this.contact=contact;
+
+    }
+
 
 
     @Override
@@ -17,7 +35,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         Fragment fragment = null;
         switch (position){
             case 0:
-                fragment = new productInfo();
+                fragment = new productInfo(address,contact,timings);
                 break;
             case 1:
                 fragment = new reviewProduct();

@@ -1,21 +1,16 @@
 package com.example.bazaarapp;
 
-public class DealPoster {
+public class ThirdRecyclerViewInHome {
     private String ImageUrl;
     private String BrandName;
-    private String DealName;
     private String description;
-    public DealPoster(){
+    public ThirdRecyclerViewInHome(){
 
         //required constructor
     }
-    public DealPoster(String url,String b,String deal,String description){
-        if(deal.trim().equals("")){
-            deal="Check Out!";
-        }
+    public ThirdRecyclerViewInHome(String url,String b,String description){
         this.ImageUrl=url;
         this.BrandName=b;
-        this.DealName=deal;
         this.description=description;
     }
 
@@ -33,14 +28,6 @@ public class DealPoster {
 
     public void setBrandName(String brandName) {
         BrandName = brandName;
-    }
-
-    public String getDealName() {
-        return DealName;
-    }
-
-    public void setDealName(String dealName) {
-        DealName = dealName;
     }
 
     public String getDescription() {

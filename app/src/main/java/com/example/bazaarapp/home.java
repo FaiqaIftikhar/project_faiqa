@@ -38,9 +38,13 @@ import java.util.List;
 public class home extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
 
     DatabaseReference mDatabaseRef;
+    DatabaseReference mmDatabaseRef;
     List<DealPoster> mdeals;
+    List<ThirdRecyclerViewInHome>mthirdRecyclerViewInHomes;
     RecyclerView mRecyclerview;
+    RecyclerView verticalList;
     DealAdapter mAdapter;
+    ThirdRecyclerViewInHomeAdapter mmAdapter;
     TextView textCartItemCount;
     int mCartItemCount = 10;
     ViewFlipper flipper;
@@ -141,6 +145,8 @@ public class home extends AppCompatActivity implements View.OnClickListener, Nav
 
 */
         /////RECYCELR VIEW 3
+
+        /*
         RecyclerView verticalList=findViewById(R.id.verticalList);
         verticalList.setHasFixedSize(true);
         verticalList.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
@@ -153,8 +159,38 @@ public class home extends AppCompatActivity implements View.OnClickListener, Nav
 
 
         //verticalList.setAdapter();
-        verticalList.setAdapter(new verticalAdapter(v1,vi1,v2,vi2));
+        verticalList.setAdapter(new verticalAdapter(v1,vi1,v2,vi2));*/
 
+        verticalList=findViewById(R.id.verticalList);
+        verticalList.setHasFixedSize(true);
+        verticalList.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        verticalList.setItemAnimator(new DefaultItemAnimator());
+        mthirdRecyclerViewInHomes=new ArrayList<>();
+        mmDatabaseRef= FirebaseDatabase.getInstance().getReference("Registered Brands");
+        mmDatabaseRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    Toast.makeText(getBaseContext(), "in ONDataChange!" , Toast.LENGTH_SHORT ).show();
+                   // ThirdRecyclerViewInHome upload1 = postSnapshot.getValue(ThirdRecyclerViewInHome.class);
+                    Brand checker=postSnapshot.getValue(Brand.class);
+                    ThirdRecyclerViewInHome upload1=new ThirdRecyclerViewInHome(checker.getBrandLogo(),checker.getBrandName(),checker.getCategory());
+                    mthirdRecyclerViewInHomes.add(upload1);
+                }
+
+                mmAdapter = new ThirdRecyclerViewInHomeAdapter(home.this, mthirdRecyclerViewInHomes);
+
+                verticalList.setAdapter(mmAdapter);
+                //  mProgressCircle.setVisibility(View.INVISIBLE);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(home.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                //   mProgressCircle.setVisibility(View.INVISIBLE);
+            }
+        });
 
     }
 
@@ -242,6 +278,12 @@ public class home extends AppCompatActivity implements View.OnClickListener, Nav
                 startActivity(intent);
                 //  getSupportFragmentManager().beginTransaction().replace(R.id.drawer_layout,new shit()).commit();
                 Toast.makeText(getBaseContext(), "Post your add now!!!!" , Toast.LENGTH_SHORT ).show();
+                break;
+            case R.id.nav_brand:
+                Intent intent7 = new Intent(this, BrandActivity.class);
+                startActivity(intent7);
+                //  getSupportFragmentManager().beginTransaction().replace(R.id.drawer_layout,new shit()).commit();
+                Toast.makeText(getBaseContext(), "Register your brand NOW!" , Toast.LENGTH_SHORT ).show();
                 break;
             case R.id.nav_favourites:
                 Intent intent1 = new Intent(this, favourite.class);

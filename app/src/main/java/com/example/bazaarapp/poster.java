@@ -19,12 +19,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-
+import com.android.volley.AuthFailureError;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
@@ -32,6 +36,14 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -55,6 +67,21 @@ public class poster extends AppCompatActivity {
     private FirebaseAuth auth;
     private StorageTask mUploadTask; //to prevent multiple uploads
 
+    //
+    EditText edtTitle;
+    EditText edtMessage;
+    final private String FCM_API = "https://fcm.googleapis.com/fcm/send";
+    final private String serverKey = "key=" + "AAAAQJD00fs:APA91bHy6NdAL1JcXSeVeTM0Bnmcjg_6edOPdtI-b9AA4QdabAmC10WAsQjFIqdtWepnAUW7lbZF_mfg6w58GfqvYMJGkApc-OfjQIzVmjTCIdImfSzfoQ6dRcMnJdmglCyeFbs8-bFT";
+    final private String contentType = "application/json";
+    final String TAG11 = "NOTIFICATION TAG";
+
+
+
+    String NOTIFICATION_TITLE;
+    String NOTIFICATION_MESSAGE;
+    String TOPIC;
+
+    //
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +94,12 @@ public class poster extends AppCompatActivity {
         pathArray=new ArrayList<>();
         b1=findViewById(R.id.uploadAddPic);
         b2=findViewById(R.id.submitAdd);
+        //
+
+        edtTitle = findViewById(R.id.brand);
+        edtMessage = findViewById(R.id.description);
+        FirebaseMessaging.getInstance().subscribeToTopic("/topics/bazaarApp");
+        //
 
         mStorageRef=FirebaseStorage.getInstance().getReference("Deal Poster");
         mDatabaseRef= FirebaseDatabase.getInstance().getReference("Deal Poster");
@@ -89,6 +122,7 @@ public class poster extends AppCompatActivity {
                //     Toast.makeText(getBaseContext(), "ON clickkk!", Toast.LENGTH_SHORT).show();
                     upload();
                 }
+
             }
         });
         //mStorageRef= FirebaseStorage.getInstance().getReference();
@@ -169,6 +203,27 @@ public class poster extends AppCompatActivity {
                     progressDialog.dismiss();
                     Toast.makeText(getApplicationContext(), "Image Added!" , Toast.LENGTH_SHORT ).show();
 
+                    /////////////////////
+
+
+                    TOPIC = "/topics/bazaarApp"; //topic must match with what the receiver subscribed to
+                    NOTIFICATION_TITLE = edtTitle.getText().toString();
+                    NOTIFICATION_MESSAGE = edtMessage.getText().toString();
+
+                    JSONObject notification = new JSONObject();
+                    JSONObject notifcationBody = new JSONObject();
+                    try {
+                        notifcationBody.put("title", NOTIFICATION_TITLE);
+                        notifcationBody.put("message", NOTIFICATION_MESSAGE);
+
+                        notification.put("to", TOPIC);
+                        notification.put("data", notifcationBody);
+                    } catch (JSONException e) {
+                        Log.e(TAG11, "onCreate: " + e.getMessage() );
+                    }
+                    sendNotification(notification);
+
+                    ////////////////////
                     Task<Uri> uriTask= taskSnapshot.getStorage().getDownloadUrl();
                     while(!uriTask.isSuccessful());
                     Uri downloadUri=uriTask.getResult();
@@ -192,5 +247,34 @@ public class poster extends AppCompatActivity {
 
     public void checker(View view) {
         Toast.makeText(getApplicationContext(), "HEREEE!" , Toast.LENGTH_SHORT ).show();
+    }
+    private void sendNotification(JSONObject notification){
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(FCM_API, notification,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.i(TAG, "onResponse: " + response.toString());
+                        edtTitle.setText("");
+                        edtMessage.setText("");
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(poster.this, "Request error in ihere", Toast.LENGTH_LONG).show();
+                        Log.i(TAG, "onErrorResponse: Didn't work");
+                    }
+                }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Authorization", serverKey);
+                params.put("Content-Type", contentType);
+                return params;
+            }
+        };
+
+
+        MySingleton.getInstance(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
     }
 }
